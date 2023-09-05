@@ -19,16 +19,16 @@ signupRouter.post('/', async (req, res) => {
     })
     if (!isUser) {
         bcrypt.genSalt(10, function (err, salt) {
-            bcrypt.hash(password, salt, function (err, hash) {
+            bcrypt.hash(password, salt, async(err, hash)=> {
                 const user = new UserModel({
                     name,
                     email,
                     password: hash
                 })
-                user.save()
+                await user.save()
+                res.send({success:`User Signup successfull!`})
             })
         })
-        res.send({success:`User Signup successfull!`})
     } else {
         res.send({err:'User already registered'})
     }
