@@ -27,6 +27,7 @@ signupRouter.post('/', async (req, res) => {
                 })
                 await user.save()
                 console.log(user)
+                console.log('ok')
                 res.send({success:user})
             })
         })
