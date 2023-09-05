@@ -34,7 +34,7 @@ blogRouter.delete('/:blogID',async(req,res)=>{
 blogRouter.use(ValidationMiddleware)
 
 blogRouter.post('/create',async(req,res)=>{
-    const blog = new BlogModel.create(req.body)
+    const blog = new BlogModel(req.body)
     await blog.save()
     res.send("Blog posted successfully")
 })

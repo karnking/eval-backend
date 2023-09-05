@@ -20,12 +20,13 @@ signupRouter.post('/', async (req, res) => {
     if (!isUser) {
         bcrypt.genSalt(10, function (err, salt) {
             bcrypt.hash(password, salt, async(err, hash)=> {
-                const user = new UserModel.create({
+                const user = new UserModel({
                     name,
                     email,
                     password: hash
                 })
                 await user.save()
+                console.log(user)
                 res.send({success:user})
             })
         })
